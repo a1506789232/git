@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day04vue/vue.js"></script>
+    <style>
+        .box>div{
+            width: 500px;
+            height: 600px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            /* text-align: center; */
+            background-color: aquamarine;
+        }
+        input{
+            margin: 20px 10px;
+        }
+        table{
+            width: 500px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <!-- 填写页面 -->
+        <div v-if="content==0">
+           请输入姓名：<input type="text" v-model="inputV">
+           <br>性格：<textarea name="" id="" cols="30" rows="10"  v-model="xingge"></textarea>
+           <br>性别: <input type="radio" value="男"  v-model="sex">男<input type="radio" value="女" v-model="sex">女
+           <br>喜好: <input type="checkbox" value="玩游戏" v-model="hobby">玩游戏
+           <input type="checkbox" value="游泳"  v-model="hobby">游泳
+           <input type="checkbox" value="健身"  v-model="hobby">健身
+           <input type="checkbox" value="打篮球"  v-model="hobby">打篮球
+           <input type="checkbox" value="聊天"  v-model="hobby">聊天
+           <br>薪资范围：
+           <select name="" id=""  v-model="money">
+              <option value="" disabled>请选择</option>
+              <option value="8-10k">8-10k</option>
+              <option value="10-12k">10-12k</option>
+              <option value="12-15k">12-15k</option>
+              <option value="15-20k">15-20k</option>
+           </select>
+           {{ money }}
+           <br><button @click="tijiao">提交</button>
+        </div>
+         <!-- 渲染页面 -->
+        <div v-else-if="content==1">
+            <table>
+                 <thead>
+                     <tr>
+                         <th>姓名</th>
+                         <th>性格</th>
+                         <th>性别</th>
+                         <th>喜好</th>
+                         <th>薪资范围</th>
+                         <th>操作</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <tr v-for="(item,index) in arr">
+                         <td>{{ item.inputV }}</td>
+                         <td>{{ item.xingge }}</td>
+                         <td>{{ item.sex }}</td>
+                         <td><span v-for = "(i,index) in item.hobby">{{ i+',' }}</span></td>
+                         <td>{{ item.money }}</td>
+                         <td><button @click="del(index)">删除</button></td>
+                     </tr>
+                 </tbody>
+            </table>
+            <button @click="content=0">返回</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    // let arr = []
+    let vm = new Vue({
+         el:".box",
+         data:{
+             content:"0",
+             inputV:"",
+             xingge:"",
+             sex:"",
+             hobby:[],
+             money:"",
+             arr:[]
+         },
+         methods:{
+            tijiao(){
+                this.arr.push({inputV:this.inputV,xingge:this.xingge,sex:this.sex,hobby:this.hobby,money:this.money})
+                this.content = "1"
+                console.log(this.arr[0])
+            },
+            del(index){
+                console.log(index)
+               this.arr.splice(index,1)
+            }
+         }
+    })
+
+</script>

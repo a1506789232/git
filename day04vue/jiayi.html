@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div class="jia">
+        <p>{{num}}</p>
+        <button @click="jia">加</button>
+    </div>
+</body>
+</html>
+<script>
+    let v = new Vue({
+        el:'.jia',
+        data:{
+            num:100
+        },
+        methods:{
+            jia(){
+               this.num = this.num+100
+            }
+        }
+    })
+</script>

@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>6，表格增删</title>
+    <style>
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        姓名:<input type="text" id="user" value="cccc"><br>
+        年龄: <input type="text" id="age" value="1111"><br>
+        <br>
+        <button type="button">添加一个学生</button>
+        <br>
+        <br>
+        <table width='822' border='1' cellspacing='0'>
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                        <td><input type="checkbox" class="danxuan"></td>
+                        <td>常常</td>
+                        <td>18</td>
+                        <td>35484058423042304</td>
+                        <td> <a href="">删除</a> </td>
+                </tr> -->
+            </tbody>
+        </table>
+    </form>
+    <script>
+        var btn = document.querySelector('button');
+        var user = document.getElementById('user');
+        var age = document.getElementById('age');
+        var tbody = document.getElementsByTagName('tbody')[0];
+        var danxuan = document.getElementsByClassName('danxuan');
+        var xuhao = document.getElementsByClassName('xuhao');
+        var tr = tbody.getElementsByTagName('tr');
+        // 添加一个学生
+        btn.onclick = function () {
+            var userV = user.value;
+            var ageV = age.value;
+            // 1.创建tr
+            var tr = document.createElement('tr');
+            // 2.内容
+            tr.innerHTML = '<td>' + userV + '</td>\
+                        <td>' + ageV + '</td>\
+                        <td> <a href="#" onclick="del(this)">删除</a> </td>'
+            // 3.追加
+            tbody.appendChild(tr);
+        }
+        // 删除
+        function del(ele) {
+            ele.parentNode.parentNode.remove();
+        }
+
+    </script>
+</body>
+</html>

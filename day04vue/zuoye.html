@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span>{{num}}</span>
+        <button @click="dian">加</button>
+
+        <button @click="like1">{{like}}</button>
+
+        <div class="name">
+            <p class="mingzi"></p>
+            <button @click="dianming" class="dianming">开始点名</button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var time = null
+    let jia = new Vue({
+        el: "#app",
+        data: {
+            num: 100,
+            like: "喜欢",
+            arr: ['纪云喆', '姜卜瑞', '王馨', '白瑞瑞', '杨涛', '吴涛', '李孟龙', '王兆龙', '徐浩轩', '职启迪', '刘月荣', '贾赫', '贾炳楠', '丁保乐', '陈羽嘉', '徐海峰', '申梦飞'
+                , '李文星', '王鑫旺', '张庆', '刘连波', '孙铎', '白宇', '侯光照', '张博', '张方涛', '祁小博', '杨预志', '冯浩', '李学艳', '杨路', '路昕杰', '张延庆', '高祥', '柴时凯', '余冠雄'],
+            txt: ""
+        },
+        methods: {
+            dian() {
+                this.num = this.num + 100
+            },
+            like1() {
+                if (this.like == "喜欢") {
+                    this.like = "不喜欢"
+                } else {
+                    this.like = "喜欢"
+                }
+            },
+            dianming() {
+                clearInterval(time)
+                let mingzi = document.querySelector('.mingzi')
+                let dianming = document.querySelector('.dianming')
+                let chang = this.arr.length - 1
+                let content = this.arr
+                let cz = function () {
+                    let arrs = Math.round(Math.random() * chang)
+                    mingzi.innerHTML = content[arrs]
+                }
+                
+                
+                
+                if(dianming.innerHTML == "停止点名"){
+                    dianming.innerHTML = "开始点名"
+                    clearInterval(time)
+                }else{
+                    dianming.innerHTML = "停止点名"
+                    time = setInterval(cz,10)
+                }
+            }
+        }
+    })
+</script>

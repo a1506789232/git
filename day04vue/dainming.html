@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div class="dian">
+        <p>{{txt}}</p>
+        <button @click="dianji">{{bool?"开始点名":"停止点名"}}</button>
+    </div>
+</body>
+
+</html>
+<script>
+    let v = new Vue({
+        el: ".dian",
+        data: {
+            bool:true,
+            arr: ['纪云喆', '姜卜瑞', '王馨', '白瑞瑞', '杨涛', '吴涛', '李孟龙', '王兆龙', '徐浩轩', '职启迪', '刘月荣', '贾赫', '贾炳楠', '丁保乐', '陈羽嘉', '徐海峰', '申梦飞'],
+            txt:"",
+            time:""
+        },
+        methods:{
+            dianji(){
+                if(this.bool){
+                    this.time = setInterval(() => {
+                    let num = Math.round(Math.random()*this.arr.length*1-1)
+                    this.txt = this.arr[num]
+                }, 50);
+                }else{
+                    clearInterval(this.time)
+                }
+                this.bool = !this.bool
+            }
+        }
+    })
+</script>

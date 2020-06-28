@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day04vue/vue.js"></script>
+</head>
+<body>
+    <div class="box">
+        <input type="text" v-model="firstName">
+        <input type="text" v-model="lastName">
+        <div>全名：{{ name }}</div>
+        <div>长度：{{ lengths }}</div>
+    </div>
+    
+</body>
+</html>
+<script>
+    let vm = new Vue({
+        el:".box",
+        data:{
+            firstName:"",
+            lastName:""
+        },
+        computed:{
+            name(){
+                return this.firstName + this.lastName
+            },
+            lengths(){
+                return this.name.length
+            }
+        }
+    })
+</script>

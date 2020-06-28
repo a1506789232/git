@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day04vue/vue.js"></script>
+</head>
+
+<body>
+    <!-- 作业一 -->
+    <div class="box">
+        <p v-xu="txt"></p>
+
+        <!-- 作业二 -->
+        <p v-background="red">徐海峰</p>
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    //自定义指令
+    // 作业一
+    Vue.directive("xu", {
+        bind(el, binding, vnode, onode) {
+            el.innerHTML = binding.value
+        }
+    })
+
+    // ----------------------------------------------------
+    //vue构造函数
+    let vm = new Vue({
+        el: ".box",
+        data: {
+            txt: "徐海峰",
+            red: "red"
+        },//作业二
+        directives: {
+            background(el, binding) {
+                el.style.background = binding.value
+            }
+        }
+    })
+</script>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1px solid #000">
+        <thead>
+            <tr>
+                <th>商品名</th>
+                <th>价格</th>
+                <th>id</th>
+                <th>是否热销</th>
+                <th>数量</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+            <tr>
+                <td><button>添加到购物车</button></td>
+
+            </tr>
+        </tbody>
+    </table>
+    <h2>购物车</h2>
+    <table border="1px solid #000">
+        <thead>
+            <tr>
+                <th>商品名</th>
+                <th>价格</th>
+                <th>id</th>
+                <th>是否热销</th>
+                <th>数量</th>
+            </tr>
+        </thead>
+        <tbody class="tbody2">
+
+        </tbody>
+    </table>
+    <script>
+        let tbody = document.querySelector('.tbody')
+        let tbody2 = document.querySelector('.tbody2')
+        let arr = [
+            {
+                name: "苹果",
+                price: 8,
+                id: 1,
+                hot: true,
+                num: 1
+            },
+            {
+                name: "樱桃",
+                price: 20,
+                id: 2,
+                hot: true,
+                num: 1
+            },
+            {
+                name: "西瓜",
+                price: 1.5,
+                id: 3,
+                hot: true,
+                num: 1
+            },
+            {
+                name: "西瓜2号",
+                price: 1.8,
+                id: 4,
+                hot: true,
+                num: 1
+            }
+        ]
+        let arrs = []
+
+        render()
+
+        //渲染
+        function render() {
+            let str = ""
+            arr.forEach((item, i) => {
+                str += `<tr>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td>${item.id}</td>
+                <td>${item.hot}</td>
+                <td>${item.num}</td>
+                <td><button onclick=jia(${JSON.stringify(item)})>添加到购物车</button></td>
+            </tr>`
+            })
+            tbody.innerHTML = str
+        }
+        //点击添加购物车
+        function jia(o) {
+            let strs = ""
+            let result = arrs.findIndex((item) => {
+                return item.id === o.id;
+            })
+            if (result != -1) {
+                arrs[result].num++
+            } else {
+                arrs.push(o)
+            }
+            arrs.forEach((item, i) => {
+                    strs += `<tr>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td>${item.id}</td>
+                <td>${item.hot}</td>
+                <td>${item.num}</td>
+                <td><button onclick="del(${i})">删除</button></td></tr>
+            `
+                })
+                tbody2.innerHTML = strs
+        }
+
+
+
+
+
+
+        function del(i) {
+            let strs = ""
+            arrs.splice(i, 1)
+            arrs.forEach((item, i) => {
+                strs += `<tr>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td>${item.id}</td>
+                <td>${item.hot}</td>
+                <td>${item.num}</td>
+                <td><button onclick="del(${i})">删除</button></td></tr>
+            `
+            })
+            tbody2.innerHTML = strs
+        }
+    </script>
+</body>
+
+</html>

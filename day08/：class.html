@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day04vue/vue.js"></script>
+    <style>
+        .black{
+            background-color: #666;
+            opacity: 0.3;
+        }
+        .red{
+            background-color: red;
+        }
+        .yellow{
+            background-color: yellow;
+        }
+        .green{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p :class="['black',{red:count>5&&count<10},{yellow:count>=10&&count<15},{green:count>=15&&count<20}]">{{ count }}</p>
+        <button @click="count++">加</button>
+    </div>
+</body>
+</html>
+<script>
+    let vm = new Vue({
+        el:".box",
+        data:{
+            count:1
+        }
+    })
+</script>

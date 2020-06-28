@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day04vue/vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 800px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        p {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background-color: bisque;
+        }
+
+        table {
+            width: 100%;
+            text-align: center;
+            float: left;
+        }
+
+        thead>tr {
+            background-color: bisque;
+        }
+
+        tr {
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>图书管理</h1>
+        <p>
+            编号：<input type="text" v-model="obj.inputId"  disabled>
+            名称：<input type="text" v-model="obj.inputName">
+            <button @click="submit">提交</button>
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in arr">
+                    <td>{{ index+1 }}</td>
+                    <td>{{ item.inputName }}</td>
+                    <td>{{item.time}}</td>
+                    <td><a @click="del(index)">删除</a>|<a @click="ud(index)">编辑</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data: {
+            id: 0,
+            name: "",
+            time: "",
+            obj: {
+                inputName: "",
+                inputId: 1,
+                time: new Date()
+            }
+            ,
+            arr: [],
+            isAdmin: false,  //是否是修改
+            indexs:0
+        },
+        methods: {
+            submit() {
+                if (this.isAdmin == false) {
+                    this.arr.push(this.obj)
+                    this.obj = {
+                        inputName: "",
+                        inputId: this.arr.length+1,
+                        time: new Date()
+                    }
+                } else {
+                    // console.log( this.obj.inputName)
+                    this.arr[this.indexs].inputName = this.obj.inputName
+                    this.arr[this.indexs].inputId = this.obj.inputId
+                    this.obj = {
+                        inputName: "",
+                        inputId: 1,
+                        time: new Date()
+                    }
+                    this.isAdmin = false
+                }
+
+            },
+            del(i) {
+                this.arr.splice(i, 1)
+            },
+            ud(i) {
+                this.indexs = i
+                this.obj.inputName = this.arr[i].inputName
+                this.obj.inputId = this.indexs+1
+                this.isAdmin = true
+            }
+        }
+    })
+</script>

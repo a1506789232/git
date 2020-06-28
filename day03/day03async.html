@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jq3.0.js"></script>
+</head>
+<body>
+    <div class="box">
+        动画片
+    </div>
+</body>
+<script>
+    let box = document.querySelector('.box')
+
+    let p = (url)=>{
+      return  new Promise((resolve,reject)=>{
+            $.ajax({
+                url,
+                success:(res)=>{
+                     resolve(res)
+                },
+                error:(res)=>{
+                  reject('失败')
+                }
+            })
+        })
+    }
+
+
+    let ajax = async()=>{
+        let p1 = await p('http://localhost:3000/data')
+        box.innerHTML = p1
+        
+        let p2 = await p('http://localhost:3000/data1')
+        box.innerHTML = p2
+
+        let p3 = await p('http://localhost:3000/data2')
+        box.innerHTML = p3
+
+    }
+    ajax()
+</script>
+</html>

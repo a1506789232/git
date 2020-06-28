@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Person{
+        constructor(name){
+             this.name=name
+        }
+    }
+    let p = new Person('徐海峰')
+    console.log(p.name)
+
+
+    class Childe extends Person{
+        constructor (name){
+            super(name)
+        }
+    }
+
+    let c = new Childe("傻逼")
+    console.log(c.name)
+</script>
+</html>

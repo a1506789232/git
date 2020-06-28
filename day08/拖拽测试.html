@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			#box1{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+			}
+			
+			#box2{
+				width: 100px;
+				height: 100px;
+				background-color: yellow;
+				position: absolute;
+				
+				top: 200px;
+				left: 500px;
+			}
+			
+		</style>
+		
+		<script type="text/javascript">
+			
+			window.onload = function(){
+				/*
+				 * 使鼠标可以在页面中来拖拽box1
+				 * 
+				 * 拖拽的流程：
+				 * 	1.当鼠标在元素上按下时，开始拖拽 	onmousedown
+				 * 	2.当鼠标移动时，元素跟随鼠标移动 	onmousemove
+				 * 	3.当鼠标松开时，元素固定在当前位置，拖拽结束	onmouseup
+				 */
+				
+				
+				//1.当鼠标在元素上按下时，开始拖拽 	onmousedown
+				//为box1绑定一个鼠标按下的事件
+				var box1 = document.getElementById("box1");
+				box1.onmousedown = function(event){
+					event = event || window.event;
+					
+					//设置box1捕获所有的鼠标按下的事件
+					//在chrome中没有setCapture()和releaseCapture()方法
+					//所以调用会导致浏览器报错
+					/*if(box1.setCapture){
+						box1.setCapture();
+					}*/
+					box1.setCapture && box1.setCapture();
+					
+					//求元素的偏移量
+					//clientX - offsetLeft
+					var ol = event.clientX - box1.offsetLeft;
+					var ot = event.clientY - box1.offsetTop;
+					
+					/*
+					 * 目前我们的元素的左上角和鼠标指针重合，
+					 * 	我们希望我们点击元素时，鼠标和元素的相对的位置保持不变
+					 */
+					
+					//2.当鼠标移动时，元素跟随鼠标移动 	onmousemove
+					//为document绑定一个鼠标移动的事件
+					document.onmousemove = function(event){
+						event = event || window.event;
+						 
+						//获取鼠标的坐标
+						var left = event.clientX - ol;
+						var top = event.clientY - ot;
+						
+						//修改box1的位置
+						box1.style.left = left + "px";
+						box1.style.top = top + "px";
+						
+					};
+					
+					//3.当鼠标松开时，元素固定在当前位置，拖拽结束	onmouseup
+					document.onmouseup = function(){
+						//当鼠标松开时，将元素固定在当前位置，取消document的onmousemove事件
+						document.onmousemove = null;
+						//onmouseup事件只需要执行一次，执行过一次以后就没有存在的意义了
+						document.onmouseup = null;
+						
+						/*if(box1.releaseCapture){
+							//设置box1不再对所有的事件进行捕获
+							box1.releaseCapture();
+						}*/
+						box1.releaseCapture && box1.releaseCapture();
+						
+						
+					};
+					
+					/*
+					 * 当我们在浏览器中选中一个文字或一个内容并拖动时，浏览器会自动去搜索引擎中搜索该内容
+					 * 	但是这个行为的出现会导致拖拽功能出现异常，这一行为是浏览器的默认行为
+					 * 如果不希望发生该行为，则可以在onmousedown事件中取消默认行为
+					 * 
+					 * 但是这个方法对IE8不起作用
+					 */
+					
+					return false;
+					
+				};
+			};
+			
+			
+		</script>
+	</head>
+	<body>
+		
+		我是一段文字
+		
+		<div id="box1"></div>
+		
+		<div id="box2"></div>
+		
+	</body>
+</html>

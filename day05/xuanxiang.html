@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day04vue/vue.js"></script>
+</head>
+<body>
+    <div class="box">
+        <button @click="one = 1">一</button>
+        <button @click="one = 2">二</button>
+        <button @click="one = 3">三</button>
+        <div v-if="one == 1">第一个按钮内容</div>
+        <div v-else-if="one == 2">第二个按钮内容</div>
+        <div v-else>第三个按钮内容</div>
+    </div>
+</body>
+</html>
+<script>
+     let vm = new Vue({
+         el:".box",
+         data:{
+             one:"1"
+         }
+     })
+</script>

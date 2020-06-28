@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day04vue/vue.js"></script>
+    
+</head>
+<body>
+    <div class="box">
+            <ul>
+                <li v-for = "(item,index) in arr">
+                      <span>  名称:{{ item.name }} </span>
+                      <span> 价格：{{ item.price | ziding(2)}} </span>
+                </li>
+            </ul>
+    </div>
+</body>
+</html>
+<script>
+   Vue.filter("ziding",(val,num)=>{
+         return Number(val).toFixed(num)
+   })
+
+    let vm = new Vue({
+        el:".box",
+        data:{
+            arr:[
+                {
+                    name:"苹果",
+                    price:10.15615
+                },
+                {
+                    name:"香蕉",
+                    price:6.165
+                },
+                {
+                    name:"西瓜",
+                    price:1.556
+                }
+            ]
+        },
+        methods:{
+            
+        }
+    })
+</script>

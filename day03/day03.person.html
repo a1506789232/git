@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person{
+            constructor(name,age,sex,xingge){
+                 this.name = name,
+                 this.age = age,
+                 this.sex = sex,
+                 this.xingge = xingge
+            }
+        }
+
+        let p = new Person('徐海峰',20,'男','温柔')
+        
+        console.log(p)
+        class Children extends Person{
+            constructor(name,age,sex,xingge){
+                super(name,age,sex,xingge)
+            }
+        }
+
+        let c = new Children('徐小峰',10,'男',p.xingge)
+        console.log(c)
+
+    </script>
+</body>
+</html>

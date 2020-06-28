@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <button class="button">点击</button>
+    <div id="app">
+        {{xuhaifeng}}
+        {{p}}
+    </div>
+</body>
+
+</html>
+<script>
+    let btn = document.querySelector('.button')
+    let data = {
+        xuhaifeng: "大帅哥",
+        p: "真帅"
+    }
+    let app = new Vue({
+        el: '#app',
+        data: data
+    })
+
+    btn.onclick = () => {
+        app.$data.p = "真丑"
+    }
+</script>

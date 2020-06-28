@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        // let p = new Promise((resolve,reject)=>{
+        //       let num = Math.round(Math.random()*10)
+        //       if(num >5){
+        //           resolve('成功')
+        //       }else{
+        //           reject('失败')
+        //       }
+        // console.log(num)
+
+        // })
+        // p.then((res)=>{
+        //     console.log(res)
+        // })
+        
+        // p.catch((res)=>{
+        //     console.log(res)
+        // })
+       
+        let p = function(url){
+            return new Promise((resolve,reject)=>{
+             let xhr = new XMLHttpRequest()
+             xhr.open('get',url,false)
+             xhr.onreadystatechange=()=>{
+                 if(xhr.readyState == 4){
+                     resolve(xhr.responseText)
+                 }else{
+                     reject('失败')
+                 }
+             }
+             xhr.send()
+        })
+        }
+        
+        
+        // p('http://localhost:3000/data1').then((res)=>{
+        //     console.log(res)
+        //     return p('http://localhost:3000/data')
+        // }).then((res)=>{
+        //       console.log(res,2)
+        // })
+
+        let ajax = async ()=>{
+            let res = await p('http://localhost:3000/data1')
+            console.log(res)
+            let res1 = await p('http://localhost:3000/data')
+            console.log(res1)
+        }
+        ajax()
+    </script>
+</body>
+</html>

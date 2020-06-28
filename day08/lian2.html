@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day04vue/vue.js"></script>
+    <style>
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+       <img :src="item.src" alt="" v-for="(item,index) in arr" @click="create(index)">
+<br>
+       <button @click="submit">添加</button>
+<br>
+       <div style="width: 400px;height:300px;border:1px solid #ccc">
+           <img :src="item.src" alt="" v-for="(item,index) in arrs">
+       </div>
+    </div>
+</body>
+</html>
+<script>
+    let vm = new Vue({
+        el:".box",
+        data:{
+            arr:[
+                {
+                    src:"timg.gif",
+                    bool:false,
+                    name:1
+                },
+                {
+                    src:"u=1833144402,4010621042&fm=26&gp=0.jpg",
+                    bool:false,
+                    name:2
+                },
+                {
+                    src:"u=2169533086,3449808030&fm=26&gp=0.jpg",
+                    bool:false,
+                    name:3
+                },
+                {
+                    src:"u=3198820874,3059998923&fm=26&gp=0.jpg",
+                    bool:false,
+                    name:4
+                },
+                {
+                    src:"u=3465628960,3276505448&fm=26&gp=0.jpg",
+                    bool:false,
+                    name:5
+                },
+            ],
+            arrs:[]
+        },
+        methods:{
+            create(i){
+                this.arr[i].bool = true;
+                this.arrs.push(this.arr[i])
+            },
+            submit(){
+                this.arrs.map(item=>{
+                    console.log(item.name)
+                })
+            }
+        }
+    })
+</script>

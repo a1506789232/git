@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+</style>
+
+<body>
+    <!-- 下拉菜单 -->
+    <input type="text" name="txt" style="width: 300px;">
+    <ul style="width: 300px;text-align: center;background-color: #ccc;display: none;">
+    </ul>
+    <script>
+        let arr = [{
+            id: 1,
+            name: "烤全羊",
+            price: 3000
+        },
+        {
+            id: 2,
+            name: "烤猪蹄",
+            price: 30
+        },
+        {
+            id: 3,
+            name: "烤鱼",
+            price: 108
+        },
+        {
+            id: 4,
+            name: "烤乳猪",
+            price: 6000
+        },
+        {
+            id: 5,
+            name: "烤辣椒",
+            price: 4
+        },
+        {
+            id: 6,
+            name: "涮羊肉",
+            price: 39
+        },
+        {
+            id: 7,
+            name: "涮牛肚",
+            price: 40
+        },
+        {
+            id: 8,
+            name: "涮菠菜",
+            price: 4
+        },
+        {
+            id: 9,
+            name: "涮牛丸",
+            price: 18
+        },
+        {
+            id: 10,
+            name: "涮大虾",
+            price: 39
+        },
+        {
+            id: 11,
+            name: "涮虾滑",
+            price: 39
+        },
+        {
+            id: 2,
+            name: "烤猪尾巴",
+            price: 30
+        },
+        ]
+        let inputs = document.querySelector('input')
+        let ul = document.querySelector('ul')
+        let str = ""
+        let arrs = []
+        let result = ""
+        ul.innerHTML = ""
+        inputs.oninput = () => {
+            ul.style.display = "block"
+            ul.innerHTML = ""
+            let obj = inputs.value
+            let shuju = ""
+            shuju = arr.filter(item => {
+                return item.name.includes(obj);
+            })
+            for (let i = 0; i < shuju.length; i++) {
+                let str = document.createElement('li')
+                str.innerHTML += `${shuju[i].name}`
+                ul.appendChild(str);
+            }
+
+            if (obj == "") {
+                ul.style.display = "none"
+                ul.innerHTML = ""
+                arrs = []
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

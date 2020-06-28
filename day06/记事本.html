@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="1.css">
+    <script src="../day04vue/vue.js"></script>
+</head>
+
+<body>
+
+    <div class="box">
+        <header>
+            <section>
+                <label for="title">ToDoList</label>
+                <input type="text" placeholder="添加ToDo" v-model="json.txt" @keyup.enter="create">
+            </section>
+        </header>
+        <section>
+            <h2>正在进行 <span id="todocount">{{geshu}}</span></h2>
+            <ol id="todolist" class="demo-box">
+                <li v-for="(item,index) in arr" v-if="!item.bool">
+                    <input type="checkbox" v-model="item.bool" class="input">
+                    <p @click="ud(index)" v-show="item.inputIsadmin">{{ item.txt }}</p>
+                    <input type="text" v-model="item.txt" v-show="!item.inputIsadmin" @keydown.enter="gai(index)">
+                    <a @click="del(index)">x</a>
+                </li>
+            </ol>
+            <h2>已经完成 <span id="donecount">{{arr.length - geshu}}</span></h2>
+            <ul id="donelist">
+                <li v-for="(item,index) in arr" v-if="item.bool">
+                    <input type="checkbox" v-model="item.bool"  class="input">
+                    <p @click="ud(index)"  v-show="item.inputIsadmin">{{ item.txt }}</p>
+                    <input type="text" v-model="item.txt" v-show="!item.inputIsadmin" @keydown.enter="gai(index)">
+                    <a @click="del(index)">x</a>
+                </li>
+            </ul>
+        </section>
+        <footer>
+            Copyright &copy; 2014 todolist.cn <a href="javascript:clear();">clear</a>
+        </footer>
+    </div>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data: {
+            json: {
+                txt: "",
+                bool: false,
+                inputIsadmin:true
+            },
+            arr: [],
+            isAdmin: false,  //是否是修改
+            indexs: ''
+        },
+        methods: {
+            create() {
+                    this.arr.push(this.json)
+                    this.json = {
+                        txt: "",
+                        bool: false,
+                        inputIsadmin :true
+                    }
+            },
+            del(i) {
+                this.arr.splice(i, 1)
+            },
+            ud(i) {
+                this.arr[i].inputIsadmin = false
+                
+            },
+            gai(i){
+                this.arr[i].inputIsadmin = true
+              
+            }
+        },
+        watch: {
+            arr: {
+                handler(newValue) {
+                    localStorage.arr = JSON.stringify(newValue);
+                },
+                deep: true
+            }
+        },
+        computed: { //数量
+            geshu() {
+                let set = 0
+                this.arr.map(item => {
+                    if (item.bool === false) {
+                        set++
+                    }
+                });
+                return set
+
+            }
+        },
+
+        //当vue创建完成以后触发这个回调函数
+        created() { //vue的生命周期函数
+            let todo = localStorage.arr
+            //如果存储在localStorage里面的存在的话就赋给todoList
+            todo && (this.arr = JSON.parse(todo));
+        }
+    })
+
+</script>

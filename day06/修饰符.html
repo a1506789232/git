@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day04vue/vue.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <input type="text" @keydown.ctrl.enter="keys">
+        <button @click.prevent.shift.right="shubiao">点击</button>
+    </div>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data:{
+
+        },
+        methods:{
+            keys(){
+                console.log('回车')
+            },
+            shubiao(){
+                console.log('鼠标')
+            }
+        }
+    })
+</script>

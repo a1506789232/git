@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <input type="text" placeholder="用户名" class="user">
+        <input type="text" placeholder="年龄" class="age">
+        <button>提交</button>
+    </div>
+    <table border="1px solid #ccc" style="text-align: center;">
+          <thead>
+              <tr>
+                  <td>姓名</td>
+                  <td>年龄</td>
+                  <td>删除</td>
+              </tr>
+          </thead>
+         <tbody>
+          </tbody>
+    </table>
+    <script>
+        let button = document.querySelector('button')
+        let user = document.querySelector('.user')
+        let age = document.querySelector('.age')
+        let tbody = document.querySelector('tbody')
+        let arr = []
+        button.onclick = () =>{
+            let obj = {user:user.value,age:age.value}
+            arr.push(obj)
+            console.log(arr)
+            render(arr)
+        }
+
+       function render(arr){
+        let str = ""
+        arr.forEach((item,i) => {
+            str += `<tr><td>${arr[i].user}</td>
+                      <td>${arr[i].age}</td>
+                      <td onclick="del(${i})">删除</td></tr>`
+        })
+        tbody.innerHTML = str
+    }
+        function del(i){
+            arr.splice(i,1)
+            render(arr)
+        }
+    </script>
+</body>
+</html>
